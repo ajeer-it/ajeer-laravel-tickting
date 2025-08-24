@@ -18,7 +18,7 @@
                     <th class="py-2 px-4 border-b text-right">العنوان</th>
                     <th class="py-2 px-4 border-b text-right">الوصف</th>
                     <th class="py-2 px-4 border-b text-right">الحالة</th>
-                    <th class="py-2 px-4 border-b text-right">إجراءات</th>
+                    <th class="py-2 px-4 border-b text-center ">إجراءات</th>
                 </tr>
             </thead>
             <tbody class="text-right">
@@ -28,7 +28,7 @@
                         <td class="py-2 px-4 border-b">{{ $ticket->title }}</td>
                         <td class="py-2 px-4 border-b">{{ Str::limit($ticket->description, 50) }}</td>
                         <td class="py-2 px-4 border-b capitalize">{{ $ticket->status }}</td>
-                        <td class="py-2 px-4 border-b flex gap-2 justify-end">
+                        <td class="py-2 px-4 border-b flex gap-2 justify-center">
                             @if(auth()->user()->isAdmin())
                                 <a href="{{ route('admin.tickets.edit', $ticket->id) }}"
                                    class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-1 px-3 rounded shadow-sm">
