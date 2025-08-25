@@ -30,7 +30,7 @@ class AuthController extends Controller
             return redirect()->route('tickets.index');
         }
 
-        return back()->withErrors(['email' => 'Invalid credentials.']);
+        return back()->withErrors(['email' => 'البيانات غير صحيحة.']);
     }
 
     public function register(Request $request)
