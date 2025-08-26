@@ -2,14 +2,11 @@
 
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
-use Livewire\Volt\Volt;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 
-// Route::get('/', function () {
-//     return view('welcome');
-// })->name('home');
+Route::redirect("/", "/dashboard");
 
 Route::view('/', 'dashboard')
     ->middleware(['auth', 'verified'])
@@ -24,8 +21,6 @@ Route::view('/', 'dashboard')
 // });
 
 require __DIR__ . '/auth.php';
-
-Route::get('/', fn() => view('welcome'))->name('home');
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'showLogin'])->name('login');

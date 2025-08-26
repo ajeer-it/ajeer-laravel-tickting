@@ -28,9 +28,11 @@
                     </form>
                 @else
                     <a href="{{ route('login') }}"
-                        class="px-4 py-1.5 bg-white text-red-600 rounded-lg shadow font-semibold hover:bg-gray-100 transition">تسجيل الدخول</a>
+                        class="px-4 py-1.5 bg-white text-red-600 rounded-lg shadow font-semibold hover:bg-gray-100 transition">تسجيل
+                        الدخول</a>
                     <a href="{{ route('register') }}"
-                        class="px-4 py-1.5 bg-white text-red-600 rounded-lg shadow font-semibold hover:bg-gray-100 transition">إنشاء حساب</a>
+                        class="px-4 py-1.5 bg-white text-red-600 rounded-lg shadow font-semibold hover:bg-gray-100 transition">إنشاء
+                        حساب</a>
                 @endauth
             </div>
         </div>
@@ -68,9 +70,10 @@
         </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-red-600 text-white text-center py-4 mt-12">
-        &copy; {{ date('Y') }} {{ config('app.name', 'MyApp') }}. جميع الحقوق محفوظة.
+    <footer class="bg-red-600 text-white text-center p-4 mt-8">
+        &copy; {{ date('Y') }} شركة أجير. جميع الحقوق محفوظة.
+        <div>للإستخدام الداخلي فقط</div>
     </footer>
 </body>
+
 </html>
