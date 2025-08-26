@@ -40,6 +40,7 @@ class TicketController extends Controller
             'description' => 'required|string',
             'product_id' => 'required|exists:products,id',
             'priority' => 'required|in:low,medium,high,critical',
+            'page_url' => 'required|string|max:255',
             'file_path' => 'nullable|file|mimes:jpg,png,pdf,docx|max:2048',
             'problem_start' => 'nullable|string|max:255',
             'problem_details' => 'nullable|string',
@@ -50,7 +51,6 @@ class TicketController extends Controller
             'affected_users' => 'nullable|string',
             'frequency' => 'nullable|in:always,sometimes',
             'frequency_details' => 'nullable|string|max:255',
-            'page_url' => 'nullable|string|max:255',
             'notes' => 'nullable|string',
         ]);
 

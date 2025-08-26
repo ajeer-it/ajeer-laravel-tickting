@@ -14,8 +14,7 @@
             </div>
         @endif
 
-        <form action="{{ route('tickets.store') }}" method="POST" enctype="multipart/form-data"
-            class="space-y-6 text-right">
+        <form action="{{ route('tickets.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6 text-right">
             @csrf
 
             <div class="grid md:grid-cols-2 gap-6">
@@ -31,7 +30,7 @@
                     <select name="product_id"
                         class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:border-red-500"
                         required>
-                        @foreach($products as $product)
+                        @foreach ($products as $product)
                             <option value="{{ $product->id }}">{{ $product->name }}</option>
                         @endforeach
                     </select>
@@ -44,7 +43,12 @@
                     class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:border-red-500"
                     required></textarea>
             </div>
-
+            <div>
+                <label class="block mb-1 font-medium text-gray-700">رابط</label>
+                <input type="text" name="page_url" placeholder="رابط الصفحة التي تواجه فيها المشكلة"
+                    class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                    required>
+            </div>
             <div class="grid md:grid-cols-2 gap-6">
                 <div>
                     <label class="block mb-1 font-medium text-gray-700">الأولوية</label>
