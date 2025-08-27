@@ -17,7 +17,11 @@ class TicketController extends Controller
     public function index()
     {
         // Normal user sees only his tickets
-        $tickets = Ticket::where('employee_id', Auth::id())->get();
+        if (!Auth::user()->isAdmin()) {
+            $tickets = Ticket::where('employee_id', Auth::id())->get();
+        } else {
+            $tickets = Ticket::all();
+        }
         return view('tickets.index', data: compact('tickets'));
     }
 
