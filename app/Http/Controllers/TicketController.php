@@ -14,16 +14,42 @@ class TicketController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        // Normal user sees only his tickets
+        $query = Ticket::query();
+
+        // لو المستخدم مش أدمن يشوف بس تذاكره
         if (!Auth::user()->isAdmin()) {
-            $tickets = Ticket::where('employee_id', Auth::id())->get();
+            $query->where('employee_id', Auth::id());
         } else {
-            $tickets = Ticket::all();
+            // فلترة بالمستخدم (للأدمن فقط)
+            if ($request->filled('user_id')) {
+                $query->where('employee_id', $request->user_id);
+            }
         }
-        return view('tickets.index', data: compact('tickets'));
+
+        // فلترة بالحالة
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
+        }
+
+        // بحث بالـ ID أو العنوان
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('id', $search)
+                    ->orWhere('title', 'like', "%{$search}%");
+            });
+        }
+
+        $tickets = $query->latest()->get();
+
+        // لو أدمن هنجيب كل المستخدمين عشان نعرضهم في الفلتر
+        $users = Auth::user()->isAdmin() ? \App\Models\User::all() : collect();
+
+        return view('tickets.index', compact('tickets', 'users'));
     }
+
 
     public function adminIndex()
     {
