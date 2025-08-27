@@ -80,5 +80,34 @@
                 </a>
             </div>
         </form>
+
+        <div class="mt-8">
+            <h3 class="text-xl font-bold mb-4 text-right">التعليقات</h3>
+
+            @forelse ($ticket->comments as $comment)
+                <div class="border rounded p-3 mb-3 text-right">
+                    <p class="font-semibold">{{ $comment->user->name }}:</p>
+                    <p class="text-gray-700">{{ $comment->body }}</p>
+                    <small class="text-gray-500">{{ $comment->created_at->diffForHumans() }}</small>
+                </div>
+            @empty
+                <p class="text-gray-500">لا توجد تعليقات بعد</p>
+            @endforelse
+        </div>
+
+        <!-- Add new comment -->
+        <div class="mt-6">
+            <form action="{{ route('comments.store') }}" method="POST" class="space-y-3 text-right">
+                @csrf
+                <input type="hidden" name="ticket_id" value="{{ $ticket->id }}">
+                <textarea name="body" rows="3" class="w-full border border-gray-300 rounded px-3 py-2 text-right"
+                    placeholder="أدخل تعليقك..." required></textarea>
+                <button type="submit" class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded">
+                    إضافة تعليق
+                </button>
+            </form>
+        </div>
+
+
     </div>
 @endsection

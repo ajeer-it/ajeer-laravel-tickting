@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCommentRequest;
 use App\Http\Requests\UpdateCommentRequest;
 use App\Models\Comment;
+use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
@@ -27,10 +28,25 @@ class CommentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreCommentRequest $request)
+    public function store(Request $request)
     {
-        //
+        $request->validate([
+            'ticket_id' => 'required|exists:tickets,id',
+            'body'      => 'required|string',
+        ]);
+
+        $comment = Comment::create([
+            'ticket_id' => $request->ticket_id,
+            'user_id'   => auth()->id(),
+            'body'      => $request->body,
+        ]);
+        $comment->ticket->update([
+            'status' => 'open',
+        ]);
+
+        return redirect()->back()->with('success', 'تم إضافة التعليق بنجاح');
     }
+
 
     /**
      * Display the specified resource.

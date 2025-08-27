@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\ProductController;
@@ -35,6 +36,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::middleware(['auth'])->group(function () {
     // user dashboard
     Route::get('/', fn() => view('dashboard'))->name('dashboard');
+    Route::resource('comments', CommentController::class)->only(['store']);
 
     // tickets
     Route::get('/tickets', [TicketController::class, 'index'])->name('tickets.index');
